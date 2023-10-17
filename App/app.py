@@ -11,3 +11,4 @@ bootstrap = Bootstrap5(app)
 #     return os.path.normpath(os.path.join(os.path.dirname(__file__), p))
 
 # app.config['SQLALCHEMY_DATABASE_RUI'] = ('sqlite:///'+mkpath("../myapp.bd"))
+# db = SQLAlchemy(app)
