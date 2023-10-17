@@ -15,6 +15,30 @@ class User(db.Model):
         self.prenom = prenom
         self.email = email
         self.password = password
+
+    # les getteurs
+    def get_pseudo(self) -> str:
+        return self.pseudo
+
+    def get_nom(self) -> str:
+        return self.nom
     
-    def __repr__(self):
-        return '<User %r>' % self.pseudo
+    def get_prenom(self) -> str:
+        return self.prenom
+    
+    def get_email(self) -> str:
+        return self.email
+    
+    def get_password(self) -> str:
+        return self.password
+    
+class UserDB:
+    @classmethod
+    def insert_new_user(cls: User, pseudo: str, nom: str, prenom: str, email: str, password: str) -> None:
+        new_user = User(pseudo, nom, prenom, email, password)
+        db.session.add(new_user)
+        db.session.commit()
+    
+    @classmethod
+    def get_user_by_pseudo(cls: User, pseudo: str) -> User:
+        return User.query.filter_by(pseudo=pseudo).first()
