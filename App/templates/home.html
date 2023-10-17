@@ -1,11 +1,243 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>a</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static',filename='home.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head %}
+        {% block styles %}
+        {{ bootstrap.load_css() }}
+        {% endblock %}
+        {% endblock %}
+        <title>BlogNews</title>
+    </head>
+    <body>
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+                <div class="container-fluid">
+                    <div class="position_image_nav">
+                        <img src="../static/img/image.png" class="img-fluid"
+                            alt="...">
+                        <a class="navbar-brand" href="#"><h1>BlogNews</h1></a>
+                    </div>
+                    <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse"
+                        id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="#">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Liste Blog</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search"
+                                placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success"
+                                type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <link
+                    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                    rel="stylesheet">
+                <div class="container mb80">
+                    <div class="page-timeline">
+                        <div class="vtimeline-point">
+                            <div class="vtimeline-icon">
+                                <i class="fa fa-image"></i>
+                            </div>
+                            <div class="vtimeline-block">
+                                <span class="vtimeline-date">June 25, 2017</span><div
+                                    class="vtimeline-content">
+                                    <a href="#"><img
+                                            src="https://www.bootdey.com/image/700x400"
+                                            alt class="img-fluid mb20"></a>
+                                    <a href="#"><h3>Standard post title</h3></a>
+                                    <ul class="post-meta list-inline">
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-user-circle-o"></i>
+                                            <a href="#">John Doe</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-calendar-o"></i> <a
+                                                href="#">29 June 2017</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-tags"></i> <a
+                                                href="#">Bootstrap4</a>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Curabitur in iaculis
+                                        ex. Etiam volutpat laoreet urna. Morbi
+                                        ut tortor nec nulla commodo malesuada
+                                        sit amet vel lacus. Fusce eget efficitur
+                                        libero. Morbi dapibus porta quam laoreet
+                                        placerat.
+                                    </p><br>
+                                    <a href="#"
+                                        class="btn btn-outline-secondary btn-sm">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vtimeline-point">
+                            <div class="vtimeline-icon">
+                                <i class="fa fa-image"></i>
+                            </div>
+                            <div class="vtimeline-block">
+                                <span class="vtimeline-date">June 25, 2017</span><div
+                                    class="vtimeline-content">
+                                    <a href="#"><h3>Standard post title</h3></a>
+                                    <ul class="post-meta list-inline">
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-user-circle-o"></i>
+                                            <a href="#">John Doe</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-calendar-o"></i> <a
+                                                href="#">29 June 2017</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-tags"></i> <a
+                                                href="#">Bootstrap4</a>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Curabitur in iaculis
+                                        ex. Etiam volutpat laoreet urna. Morbi
+                                        ut tortor nec nulla commodo malesuada
+                                        sit amet vel lacus. Fusce eget efficitur
+                                        libero. Morbi dapibus porta quam laoreet
+                                        placerat.
+                                    </p><br>
+                                    <a href="#"
+                                        class="btn btn-outline-secondary btn-sm">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vtimeline-point">
+                            <div class="vtimeline-icon">
+                                <i class="fa fa-image"></i>
+                            </div>
+                            <div class="vtimeline-block">
+                                <span class="vtimeline-date">June 25, 2017</span><div
+                                    class="vtimeline-content">
+                                    <a href="#"><h3>Standard post title</h3></a>
+                                    <ul class="post-meta list-inline">
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-user-circle-o"></i>
+                                            <a href="#">John Doe</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-calendar-o"></i> <a
+                                                href="#">29 June 2017</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-tags"></i> <a
+                                                href="#">Bootstrap4</a>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Curabitur in iaculis
+                                        ex. Etiam volutpat laoreet urna. Morbi
+                                        ut tortor nec nulla commodo malesuada
+                                        sit amet vel lacus. Fusce eget efficitur
+                                        libero. Morbi dapibus porta quam laoreet
+                                        placerat.
+                                    </p><br>
+                                    <a href="#"
+                                        class="btn btn-outline-secondary btn-sm">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vtimeline-point">
+                            <div class="vtimeline-icon">
+                                <i class="fa fa-image"></i>
+                            </div>
+                            <div class="vtimeline-block">
+                                <span class="vtimeline-date">June 25, 2017</span><div
+                                    class="vtimeline-content">
+                                    <a href="#"><img
+                                            src="https://www.bootdey.com/image/700x400"
+                                            alt class="img-fluid mb20"></a>
+                                    <a href="#"><h3>Standard post title</h3></a>
+                                    <ul class="post-meta list-inline">
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-user-circle-o"></i>
+                                            <a href="#">John Doe</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-calendar-o"></i> <a
+                                                href="#">29 June 2017</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fa fa-tags"></i> <a
+                                                href="#">Bootstrap4</a>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Curabitur in iaculis
+                                        ex. Etiam volutpat laoreet urna. Morbi
+                                        ut tortor nec nulla commodo malesuada
+                                        sit amet vel lacus. Fusce eget efficitur
+                                        libero. Morbi dapibus porta quam laoreet
+                                        placerat.
+                                    </p><br>
+                                    <a href="#"
+                                        class="btn btn-outline-secondary btn-sm">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <aside>
+                <div class="widget widget-author">
+                    <div class="widget-title">
+                        <h3>Author</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="media align-items-center">
+                            <div class="avatar">
+                                <img
+                                    src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                                    title alt>
+                            </div>
+                            <div class="media-body">
+                                <h6>Hello, I'm<br> Rachel Roth</h6>
+                            </div>
+                        </div>
+                        <p>I design and develop services for customers of all
+                            sizes, specializing in creating stylish, modern
+                            websites, web services and online stores</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+        <footer>
+            <p>BlogNews - 2020</p>
+        </footer>
+    </body>
 </html>
