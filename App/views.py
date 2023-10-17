@@ -21,3 +21,11 @@ def posts():
     PostDB.insert_new_post(5, "titre", "c5", datetime.datetime.now(), UserDB.get_user_by_pseudo("pseudo"))
     posts = PostDB.get_all_posts()
     return render_template('test.html', posts=posts)
+
+@app.route('/login')
+def login():
+    return render_template('login.html', title='Login')
+
+@app.route('/register')
+def register():
+    return render_template('register.html', title='Register')
