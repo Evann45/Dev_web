@@ -6,6 +6,19 @@
     <title>a</title>
 </head>
 <body>
-    
+    {% if current_user.is_authenticated %}
+        <p>a</p>
+        {{ current_user }}
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </body>
 </html>
