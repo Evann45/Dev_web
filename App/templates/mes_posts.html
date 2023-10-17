@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block main %}
+<div class="container-fluid rounded-3 w-auto m-5 p-3 text-center">
+  <a class="btn btn-primary" type="button" href="{{ url_for('creer_post') }}"
+    >Créer un post</a
+  >
+  {% for post in posts %}
+
+  <div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3 text-center">
+    <div class="row">
+      <div class="col">
+        <p class="text-center text-light fs-2">{{ post.get_titre() }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-center text-light fs-2">{{ post.get_contenu() }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-center text-light fs-2">{{ post.get_date() }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a
+          class="btn btn-primary"
+          type="button"
+          href="{{
+        url_for('supprimer_post', id=post.get_id()) }}"
+          >Supprimer</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block main %}
+<div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3 text-center">
+  <div class="row">
+    <div class="col m-2">
+      <img
+        src="{{ url_for('static', filename='images/pp.jpg') }}"
+        class="rounded-circle mx-auto d-block"
+        alt="pp sans pp"
+        width="100"
+        height="100"
+      />
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-center text-light fs-2">
+          {{ current_user.get_pseudo() }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-center text-light fs-2">
+          {{ current_user.get_email() }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-light fs-2">
+        {{ current_user.get_nom() }} {{ current_user.get_prenom() }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary" href="{{ url_for('edit_profil')}}"
+          >Modifier</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

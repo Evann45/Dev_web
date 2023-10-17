@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     {% block head %}
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     {% block styles %}
     <!-- Bootstrap CSS -->
-    {{ bootstrap.load_css() }}
-    {% endblock %}
+    {{ bootstrap.load_css() }} {% endblock %}
     <title>{{ title }}</title>
     {% endblock %}
-</head>
-<body>
-    <div class="container w-25 position-absolute top-50 start-50 translate-middle border border-1 rounded-5 p-5">
-        <h1 class="mb-4">Register</h1>
-        <form>
-            <div class="input-group mb-3">
-                <span class="input-group-text">@</span>
-                <div class="form-floating">
-                  <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
-                  <label for="floatingInputGroup1">Username</label>
-                </div>
-            </div> 
-            <div class="form-floating mb-4">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Last name">
-                </div>
-              </div>                      
-            <div class="form-floating mb-4">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" aria-describedby="passwordHelpBlock">
-                    <label for="floatingPassword">Password</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a class="link-opacity-50-hover ms-5" href="{{url_for('login')}}">Se connecter</a>
-        </form>
+  </head>
+  <body>
+    <div
+      class="container w-25 position-absolute top-50 start-50 translate-middle border border-1 rounded-5 p-5"
+    >
+      <h1 class="mb-4">{{ title }}</h1>
+      <form method="post" action="/register">
+        {{ form.csrf_token }}
+        <div class="input-group mb-3">
+          <span class="input-group-text">@</span>
+          <div class="form-floating">
+            {{ form.pseudo(size=20, type="text", class="form-control",
+            id="floatingInputGroup1", placeholder="Username" ) }}
+            <label for="floatingInputGroup1">Pseudo</label>
+          </div>
+        </div>
+        <div class="form-floating mb-4">
+          {{ form.email(size=20, type="email", class="form-control",
+          id="floatingInput", placeholder="name@example.com" ) }}
+          <label for="floatingInput">Adresse mail</label>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            {{ form.prenom(size=20, type="text", class="form-control",
+            placeholder="Prénom") }}
+          </div>
+          <div class="col">
+            {{ form.nom(size=20, type="text", class="form-control",
+            placeholder="Nom") }}
+          </div>
+        </div>
+        <div class="form-floating mb-4">
+          {{ form.password(size=20, type="password", class="form-control",
+          id="floatingPassword", placeholder="Mot de passe" ) }}
+          <label for="floatingPassword">Mot de passe</label>
+        </div>
+        <input type="submit" class="btn btn-primary" />
+        <a class="link-opacity-50-hover ms-5" href="{{url_for('login')}}"
+          >Se connecter</a
+        >
+      </form>
     </div>
-      
-    {% block scripts %}
-    {{ bootstrap.load_js() }}
-    {% endblock %}
-</body>
+
+    {% block scripts %} {{ bootstrap.load_js() }} {% endblock %}
+  </body>
 </html>

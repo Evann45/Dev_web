@@ -50,3 +50,7 @@ class UserDB:
     @classmethod
     def get_user_by_pseudo(cls: User, pseudo: str) -> User:
         return User.query.filter_by(pseudo=pseudo).first()
+    
+    @classmethod
+    def update_user(cls: User, user: User) -> None:
+        db.session.commit()

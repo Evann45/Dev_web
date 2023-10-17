@@ -15,3 +15,4 @@ db = SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = '67ca4656-dded-4305-b5b8-7992cc0c2119'
 login_manager = LoginManager(app)
+login_manager.login_view = "login"
