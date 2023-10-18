@@ -5,6 +5,7 @@
   >
   {% for post in posts %}
 
+  <a href="{{ url_for('post', id=post.get_id()) }}" class="link-underline link-underline-opacity-0">
   <div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3 text-center">
     <div class="row">
       <div class="col">
@@ -18,7 +19,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <p class="text-center text-light fs-3">{{ post.get_date() }}</p>
+        <p class="text-center text-light fs-3">{{ timeago.format(post.get_date(), datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4), 'fr') }}</p>
       </div>
     </div>
     <div class="row">
@@ -33,6 +34,7 @@
       </div>
     </div>
   </div>
+  </a>
   {% endfor %}
 </div>
 {% endblock %}

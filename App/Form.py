@@ -5,6 +5,7 @@ from hashlib import sha256
 
 from .models.User import User, UserDB
 from .models.Post import Post, PostDB
+from .models.Commentaire import CommentaireDB
 
 import datetime
 
@@ -69,8 +70,14 @@ class PostForm(FlaskForm):
             id = -1
         PostDB.insert_new_post(id+1, self.titre.data, self.contenu.data, datetime.datetime.now(), user)
 
+class CommentaireForm(FlaskForm):
+    texte = TextAreaField('Contenu', validators=[DataRequired()])
+
+    def create_commentaire(self, user: User, post: int) -> None:
+        CommentaireDB.insert_new_commentaire(user.get_email(), post, self.texte.data)
 class SearchForm(FlaskForm):
     titre = StringField('Titre', validators=[DataRequired()])
 
     def search_post_by_titre(self) -> list:
         return PostDB.search_all_posts_by_titre(self.titre.data)
+      
