@@ -17,6 +17,8 @@ Nous avions pour but de réaliser un blog.
 
 Lors de ce TP nous avons réussie a réaliser certaines fonctionnalité comme
 
+Login, deconnexion, create account, ajouter des post, voir ces postes , edit profile, supprimer post, voir les post ,
+
 ## Ce dont nous avons pas réussi
 
 Pour ce TP nous avons pas réussi a réaliser divers fonctionnalité,
@@ -32,6 +34,8 @@ pip install bootstrap-flask
 pip install flask- sqlalchemy
 pip install flask-wtf
 pip install flask-login
+
+(vous pouvez directement aller dans le terminal et taper la commande suivante : pip install -r requirements.txt)
 
 Enfin apres avoir installé ces prérequis, il faut maintenant lancer la commande suivante : flask run
 Puis aller sur le lien donné dans le terminal
