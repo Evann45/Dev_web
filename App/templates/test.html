@@ -10,6 +10,7 @@
         {% for x in posts %}
         <li>{{ x.get_contenu() }}</li>
         {% endfor %}
+        <li>{{ user.get_email() }}</li>
     </ul>
 </body>
 </html>
