@@ -1,18 +1,35 @@
 from .app import app
 from flask import redirect, render_template, url_for, request, flash
-from .models.User import UserDB, User
-from .models.Post import PostDB, Post
+from .models.User import UserDB
+from .models.Post import PostDB
+from .models.Commentaire import CommentaireDB
 from .models.LoginManager import load_user
-from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm
+from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm, CommentaireForm
 
 from flask_login import login_user, current_user, logout_user, login_required
 
-import datetime
+import datetime, timeago
 
 @app.route('/')
 def home():
     posts = PostDB.get_all_posts()
-    return render_template('home.html', posts=posts, UserDB=UserDB)
+    return render_template('home.html', posts=posts, UserDB=UserDB, timeago=timeago, datetime=datetime)
+
+@app.route('/supprimer_commentaire/<int:id>/<int:id_comm>')
+@login_required
+def supprimer_commentaire(id, id_comm):
+    CommentaireDB.delete_commentaire_by_id(id_comm)
+    return redirect(url_for('post', id=id))
+
+@app.route('/post/<int:id>', methods=['GET', 'POST'])
+@login_required
+def post(id):
+    form = CommentaireForm()
+    if form.validate_on_submit():
+        form.create_commentaire(current_user, id)
+        return redirect(url_for('post', id=id))
+    post = PostDB.get_post_by_id(id)
+    return render_template('post.html', post=post, commentaires=CommentaireDB.get_commentaires_by_post(post), UserDB=UserDB, form=form, timeago=timeago, datetime=datetime)
 
 @app.route('/supprimer_post/<int:id>')
 @login_required
@@ -33,7 +50,7 @@ def creer_post():
 @login_required
 def mes_posts():
     posts = PostDB.get_all_posts_by_user(current_user)
-    return render_template('mes_posts.html', posts=posts, title='Mes posts')
+    return render_template('mes_posts.html', posts=posts, title='Mes posts', timeago=timeago, datetime=datetime)
 
 @app.route('/edit_profil', methods=['GET', 'POST'])
 @login_required

@@ -9,7 +9,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titre = db.Column(db.Text)
     contenu = db.Column(db.Text)
-    date = db.Column(db.Date)
+    date = db.Column(db.DateTime)
     user_mail = db.Column(db.Text, db.ForeignKey('USER.email'))
 
     def __init__(self, id, titre, contenu, date, user_mail):
@@ -57,8 +57,8 @@ class PostDB:
 
     @classmethod
     def get_all_posts(cls: Post) -> list:
-        return Post.query.all()
+        return Post.query.order_by(Post.date.desc()).all()
     
     @classmethod
     def get_all_posts_by_user(cls: Post, user: User) -> list:
-        return Post.query.filter_by(user_mail=user.get_email()).all()
+        return Post.query.filter_by(user_mail=user.get_email()).order_by(Post.date.desc()).all()
