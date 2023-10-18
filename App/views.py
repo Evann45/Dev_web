@@ -27,13 +27,13 @@ def creer_post():
     if form.validate_on_submit():
         form.create_post(current_user)
         return redirect(url_for('mes_posts'))
-    return render_template('creer_post.html', form=form)
+    return render_template('creer_post.html', form=form, title='Créer un post')
 
 @app.route('/mes_posts')
 @login_required
 def mes_posts():
     posts = PostDB.get_all_posts_by_user(current_user)
-    return render_template('mes_posts.html', posts=posts)
+    return render_template('mes_posts.html', posts=posts, title='Mes posts')
 
 @app.route('/edit_profil', methods=['GET', 'POST'])
 @login_required
@@ -43,7 +43,7 @@ def edit_profil():
         form.edit_profil(current_user)
         flash('Votre profil a été modifié !')
         return redirect(url_for('profil'))
-    return render_template('edit_profil.html', form=form)
+    return render_template('edit_profil.html', form=form, title='Modifier le profil')
 
 @app.route('/profil')
 @login_required
