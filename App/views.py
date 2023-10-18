@@ -4,16 +4,20 @@ from .models.User import UserDB
 from .models.Post import PostDB
 from .models.Commentaire import CommentaireDB
 from .models.LoginManager import load_user
-from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm, CommentaireForm
+from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm, SearchForm, CommentaireForm
 
 from flask_login import login_user, current_user, logout_user, login_required
 
 import datetime, timeago
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('recherche', titre=form.titre.data))
     posts = PostDB.get_all_posts()
-    return render_template('home.html', posts=posts, UserDB=UserDB, timeago=timeago, datetime=datetime)
+    return render_template('home.html', posts=posts, UserDB=UserDB, form=form, timeago=timeago, datetime=datetime)
 
 @app.route('/supprimer_commentaire/<int:id>/<int:id_comm>')
 @login_required
@@ -30,6 +34,14 @@ def post(id):
         return redirect(url_for('post', id=id))
     post = PostDB.get_post_by_id(id)
     return render_template('post.html', post=post, commentaires=CommentaireDB.get_commentaires_by_post(post), UserDB=UserDB, form=form, timeago=timeago, datetime=datetime)
+
+@app.route('/recherche/<titre>', methods=['GET', 'POST'])
+def recherche(titre):
+    form = SearchForm()
+    posts = PostDB.search_all_posts_by_titre(titre)
+    if form.validate_on_submit():
+        return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
+    return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
 
 @app.route('/supprimer_post/<int:id>')
 @login_required

@@ -75,3 +75,9 @@ class CommentaireForm(FlaskForm):
 
     def create_commentaire(self, user: User, post: int) -> None:
         CommentaireDB.insert_new_commentaire(user.get_email(), post, self.texte.data)
+class SearchForm(FlaskForm):
+    titre = StringField('Titre', validators=[DataRequired()])
+
+    def search_post_by_titre(self) -> list:
+        return PostDB.search_all_posts_by_titre(self.titre.data)
+      

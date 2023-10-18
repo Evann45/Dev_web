@@ -61,4 +61,8 @@ class PostDB:
     
     @classmethod
     def get_all_posts_by_user(cls: Post, user: User) -> list:
+      
         return Post.query.filter_by(user_mail=user.get_email()).order_by(Post.date.desc()).all()
+    @classmethod
+    def search_all_posts_by_titre(cls: Post, titre: str) -> list:
+        return Post.query.filter(Post.titre.like("%"+titre+"%")).all()
