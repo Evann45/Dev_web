@@ -68,3 +68,9 @@ class PostForm(FlaskForm):
         if id is None:
             id = -1
         PostDB.insert_new_post(id+1, self.titre.data, self.contenu.data, datetime.datetime.now(), user)
+
+class SearchForm(FlaskForm):
+    titre = StringField('Titre', validators=[DataRequired()])
+
+    def search_post_by_titre(self) -> list:
+        return PostDB.search_all_posts_by_titre(self.titre.data)

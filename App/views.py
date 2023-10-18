@@ -3,16 +3,28 @@ from flask import redirect, render_template, url_for, request, flash
 from .models.User import UserDB, User
 from .models.Post import PostDB, Post
 from .models.LoginManager import load_user
-from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm
+from .Form import LoginForm, RegisterForm, EditProfilForm, PostForm, SearchForm
 
 from flask_login import login_user, current_user, logout_user, login_required
 
 import datetime
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('recherche', titre=form.titre.data))
     posts = PostDB.get_all_posts()
-    return render_template('home.html', posts=posts, UserDB=UserDB)
+    return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
+
+@app.route('/recherche/<titre>', methods=['GET', 'POST'])
+def recherche(titre):
+    form = SearchForm()
+    posts = PostDB.search_all_posts_by_titre(titre)
+    if form.validate_on_submit():
+        return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
+    return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
 
 @app.route('/supprimer_post/<int:id>')
 @login_required
