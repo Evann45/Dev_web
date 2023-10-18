@@ -15,7 +15,7 @@
   </head>
   <body>
     <nav
-      class="navbar navbar-expand-lg bg-dark border-bottom border-body">
+      class="navbar navbar-expand-lg bg-dark border-bottom border-body position-fixed top-0 w-100">
       <div class="container-fluid">
         <a class="navbar-brand text-light" href="{{ url_for('home') }}">
           <img
@@ -73,5 +73,9 @@
 
     {% block main %} {% endblock %} {% block scripts %} {{ bootstrap.load_js()
     }} {% endblock %}
+    <footer class=" bg-dark ">
+      <p class="text-light">Viens nous soutenir</p>
+      <a class="nav-link text-light" href="#">HERE</a>
+    </footer>
   </body>
 </html>
