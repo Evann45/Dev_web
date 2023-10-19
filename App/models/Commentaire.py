@@ -48,3 +48,8 @@ class CommentaireDB:
     def delete_commentaire_by_id(cls: Commentaire, id: int) -> None:
         Commentaire.query.filter_by(id_commentaire=id).delete()
         db.session.commit()
+    
+    @classmethod
+    def delete_commentaire_by_post_id(cls: Commentaire, id_post: int) -> None:
+        Commentaire.query.filter_by(id_post=id_post).delete()
+        db.session.commit()
