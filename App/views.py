@@ -48,6 +48,7 @@ def recherche(titre):
 @login_required
 def supprimer_post(id):
     PostDB.delete_post_by_id(id)
+    CommentaireDB.delete_commentaire_by_post_id(id)
     return redirect(url_for('mes_posts'))
 
 @app.route('/creer_post', methods=['GET', 'POST'])
