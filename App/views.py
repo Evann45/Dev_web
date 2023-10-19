@@ -13,11 +13,11 @@ import datetime, timeago
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    form = SearchForm()
-    if form.validate_on_submit():
-        return redirect(url_for('recherche', titre=form.titre.data))
+    sForm = SearchForm()
+    if sForm.validate_on_submit():
+        return redirect(url_for('recherche', titre=sForm.titre.data))
     posts = PostDB.get_all_posts()
-    return render_template('home.html', posts=posts, UserDB=UserDB, form=form, timeago=timeago, datetime=datetime)
+    return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
 
 @app.route('/supprimer_commentaire/<int:id>/<int:id_comm>')
 @login_required
@@ -29,19 +29,20 @@ def supprimer_commentaire(id, id_comm):
 @login_required
 def post(id):
     form = CommentaireForm()
+    sForm = SearchForm()
     if form.validate_on_submit():
         form.create_commentaire(current_user, id)
         return redirect(url_for('post', id=id))
     post = PostDB.get_post_by_id(id)
-    return render_template('post.html', post=post, commentaires=CommentaireDB.get_commentaires_by_post(post), UserDB=UserDB, form=form, timeago=timeago, datetime=datetime)
+    return render_template('post.html', post=post, commentaires=CommentaireDB.get_commentaires_by_post(post), UserDB=UserDB, form=form, timeago=timeago, datetime=datetime, sForm=sForm)
 
 @app.route('/recherche/<titre>', methods=['GET', 'POST'])
 def recherche(titre):
-    form = SearchForm()
+    sForm = SearchForm()
     posts = PostDB.search_all_posts_by_titre(titre)
     if form.validate_on_submit():
-        return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
-    return render_template('home.html', posts=posts, UserDB=UserDB, form=form)
+        return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm)
+    return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm)
 
 @app.route('/supprimer_post/<int:id>')
 @login_required
@@ -53,31 +54,35 @@ def supprimer_post(id):
 @login_required
 def creer_post():
     form = PostForm()
+    sForm = SearchForm()
     if form.validate_on_submit():
         form.create_post(current_user)
         return redirect(url_for('mes_posts'))
-    return render_template('creer_post.html', form=form, title='Créer un post')
+    return render_template('creer_post.html', form=form, title='Créer un post', sForm=sForm)
 
 @app.route('/mes_posts')
 @login_required
 def mes_posts():
     posts = PostDB.get_all_posts_by_user(current_user)
-    return render_template('mes_posts.html', posts=posts, title='Mes posts', timeago=timeago, datetime=datetime)
+    sForm = SearchForm()
+    return render_template('mes_posts.html', posts=posts, title='Mes posts', timeago=timeago, datetime=datetime, sForm=sForm)
 
 @app.route('/edit_profil', methods=['GET', 'POST'])
 @login_required
 def edit_profil():
     form = EditProfilForm()
+    sForm = SearchForm()
     if form.validate_on_submit():
         form.edit_profil(current_user)
         flash('Votre profil a été modifié !')
         return redirect(url_for('profil'))
-    return render_template('edit_profil.html', form=form, title='Modifier le profil')
+    return render_template('edit_profil.html', form=form, title='Modifier le profil', sForm=sForm)
 
 @app.route('/profil')
 @login_required
 def profil():
-    return render_template('profil.html')
+    sForm = SearchForm()
+    return render_template('profil.html', title='Profil', sForm=sForm)
 
 @app.route('/test')
 def posts():
@@ -102,7 +107,9 @@ def login():
         user = form.get_authenticated_user()
         if user is not None:
             login_user(user)
-            next = form.next.data or url_for('home')
+            next = form.next.data
+            if next is None or next == "":
+                next = url_for('home')
             return redirect(next)
         return render_template('login.html', title='Se connecter', form=form)
     return render_template('login.html', title='Se connecter', form=form)

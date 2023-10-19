@@ -21,6 +21,7 @@
       <h1 class="mb-4">{{ title }}</h1>
       <form method="post" action="/login">
         {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
         <div class="form-floating mb-4">
           {{ form.email(size=20, type="email", class="form-control",
           id="floatingInput", placeholder="name@example.com" ) }}
