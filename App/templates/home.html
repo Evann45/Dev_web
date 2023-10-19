@@ -5,7 +5,7 @@
 {% endif %}
 {% for post in posts %}
 <a href="{{ url_for('post', id=post.get_id()) }}" style="text-decoration: none;">
-<div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3 text-center">
+<div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3">
   <div class="row">
     <div class="col">
       <h3 class="text-center text-light fs-2">{{ post.get_titre() }}</h3>
@@ -13,17 +13,17 @@
   </div>
   <div class="row">
     <div class="col">
-      <p class="text-center text-light fs-3">{{ post.get_contenu() }}</p>
+      <p class="text-light fs-3 text-left">{{ post.get_contenu() }}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <p class="text-center text-light fs-3">{{ timeago.format(post.get_date(), datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4), 'fr') }}</p>
+      <p class="text-light fs-3 text-left">{{ timeago.format(post.get_date(), datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4), 'fr') }}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <p class="text-center text-light fs-3">
+      <p class="text-light fs-3 text-left">
         {{ UserDB.get_user_by_email(post.get_user_mail()).get_pseudo() }}
       </p>
     </div>
