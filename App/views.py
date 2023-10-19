@@ -40,9 +40,9 @@ def post(id):
 def recherche(titre):
     sForm = SearchForm()
     posts = PostDB.search_all_posts_by_titre(titre)
-    if form.validate_on_submit():
-        return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm)
-    return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm)
+    if sForm.validate_on_submit():
+        return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
+    return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
 
 @app.route('/supprimer_post/<int:id>')
 @login_required
