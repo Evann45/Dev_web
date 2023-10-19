@@ -43,3 +43,8 @@ pip install flask-login
 
 Enfin après avoir installé ces prérequis, il faut maintenant lancer la commande suivante : flask run
 Puis aller sur le lien donné dans le terminal
+
+## Si probleme de fonctionnalité
+
+Réinitialiser la BD
+flask initdb
