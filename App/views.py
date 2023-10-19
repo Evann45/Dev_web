@@ -14,8 +14,6 @@ import datetime, timeago
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     sForm = SearchForm()
-    if sForm.validate_on_submit():
-        return redirect(url_for('recherche', titre=sForm.titre.data))
     posts = PostDB.get_all_posts()
     return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
 
@@ -36,12 +34,13 @@ def post(id):
     post = PostDB.get_post_by_id(id)
     return render_template('post.html', post=post, commentaires=CommentaireDB.get_commentaires_by_post(post), UserDB=UserDB, form=form, timeago=timeago, datetime=datetime, sForm=sForm)
 
-@app.route('/recherche/<titre>', methods=['GET', 'POST'])
-def recherche(titre):
+@app.route('/recherche', methods=['GET', 'POST'])
+def recherche():
     sForm = SearchForm()
-    posts = PostDB.search_all_posts_by_titre(titre)
     if sForm.validate_on_submit():
+        posts = PostDB.search_all_posts_by_titre(sForm.titre.data)
         return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
+    posts = PostDB.get_all_posts()
     return render_template('home.html', posts=posts, UserDB=UserDB, sForm=sForm, timeago=timeago, datetime=datetime)
 
 @app.route('/supprimer_post/<int:id>')
