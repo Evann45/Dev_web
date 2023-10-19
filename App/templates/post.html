@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block main %}
+<div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3">
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center text-light fs-2">{{ post.get_titre() }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="text-left text-light fs-3">{{ post.get_contenu() }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="text-left text-light fs-3">{{ timeago.format(post.get_date(), datetime.datetime.now() + datetime.timedelta(seconds = 60 * 3.4), 'fr') }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="text-left text-light fs-3">
+        {{ UserDB.get_user_by_email(post.get_user_mail()).get_pseudo() }}
+      </p>
+    </div>
+  </div>
+</div>
+  
+    <div class="container-fluid rounded-3 w-auto bg-dark m-5 p-4 text-center">
+      <form action="/post/{{ post.get_id() }}" method="post">
+        {{ form.csrf_token }}
+        <div class="form-floating mb-3">
+          {{ form.texte(size=20, type="text", class="form-control",
+          id="floatingTextarea2", placeholder="Écrit ton commentaire",
+          style="min-height:50px") }}
+          <label for="floatingTextarea2">{{ form.texte.label }}</label>
+        </div>
+        <input type="submit" value="Ecrire commentaire" class="btn btn-primary w-100" />
+      </form>
+    </div>
+  
+    {% for com in commentaires %}
+    <div class="container-fluid rounded-3 w-auto bg-dark m-5 p-3 text-left">
+      <div class="row">
+        <div class="col">
+          <h3 class="text-left text-light fs-2">{{ UserDB.get_user_by_email(com.get_email_user()).get_pseudo() }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="text-left text-light fs-3">{{ com.get_texte() }}</p>
+        </div>
+      </div>
+      {% if com.get_email_user() == current_user.get_email() %}
+      <div class="row">
+        <div class="col">
+          <a
+            class="btn btn-primary"
+            type="button"
+            href="{{
+          url_for('supprimer_commentaire', id=post.get_id(), id_comm=com.get_id_commentaire()) }}"
+            >Supprimer</a
+          >
+        </div>
+      </div>
+      {% endif %}
+    </div>
+</div>
+      {% endfor %}
+{% endblock %}

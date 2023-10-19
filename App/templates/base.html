@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% block styles %} {{ bootstrap.load_css() }} {% endblock %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    {% endblock %}
+  </head>
+  <body style="padding-top: 60px;">
+    <nav
+      class="navbar navbar-expand-lg bg-dark border-bottom border-body position-fixed top-0 w-100">
+      <div class="container-fluid">
+        <a class="navbar-brand text-light" href="{{ url_for('home') }}">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="Logo"
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top" />
+          Le blog
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active text-light"
+                href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-light"
+                href="{{ url_for('mes_posts') }}">Mes posts</a>
+            </li>
+          </ul>
+          <form class="d-flex me-5" role="search" action="recherche" method="post">
+            <input class="btn btn-outline-success me-2" type="submit"
+              value="Rechercher">
+            {{ sForm.csrf_token}}
+            {{sForm.titre(size=20,class="form-control me-5",
+            type="search",
+            placeholder="Rechercher")}}
+          </form>
+          <a class="btn btn-danger ms-5" href="{{ url_for('logout') }}">Déconnexion</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block main %} {% endblock %} {% block scripts %} {{ bootstrap.load_js()
+    }} {% endblock %}
+  </body>
+</html>

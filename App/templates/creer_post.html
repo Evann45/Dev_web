@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block main %}
+<div class="container w-75 mt-5 start-50 border border-1 rounded-5 p-5 bg-dark">
+  <form action="/creer_post" method="post">
+    {{ form.csrf_token }}
+    <div class="form-floating mb-3">
+      {{ form.titre(size=20, type="text", class="form-control",
+      id="floatingInput", placeholder="Titre" ) }}
+      <label for="floatingInput">{{ form.titre.label }}</label>
+    </div>
+    <div class="form-floating mb-3">
+      {{ form.contenu(size=20, type="text", class="form-control",
+      id="floatingTextarea2", placeholder="Écrit ton post",
+      style="min-height:100px") }}
+      <label for="floatingTextarea2">{{ form.contenu.label }}</label>
+    </div>
+    <input type="submit" value="Créer un post" class="btn btn-primary" />
+  </form>
+</div>
+{% endblock %}
