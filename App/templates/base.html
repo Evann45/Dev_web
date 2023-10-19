@@ -47,21 +47,16 @@
               <a class="nav-link active text-light"
                 href="{{ url_for('mes_posts') }}">Mes posts</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">Mes commentaires</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="{{ url_for('logout') }}">Déconnexion</a>
-            </li>
           </ul>
-          <form class="d-flex" role="search" action="home" method="post">
+          <form class="d-flex me-5" role="search" action="home" method="post">
+            <input class="btn btn-outline-success me-2" type="submit"
+              value="Rechercher">
             {{ sForm.csrf_token}}
-            {{sForm.titre(size=20,class="form-control me-2",
+            {{sForm.titre(size=20,class="form-control me-5",
             type="search",
             placeholder="Rechercher")}}
-            <input class="btn btn-outline-success" type="submit"
-              value="Rechercher">
           </form>
+          <a class="btn btn-danger ms-5" href="{{ url_for('logout') }}">Déconnexion</a>
         </div>
       </div>
     </nav>
