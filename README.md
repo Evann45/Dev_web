@@ -16,8 +16,13 @@ Nous avions pour but de réaliser un blog.
 ## <a>Ce dont nous avons réussi</a>
 
 Lors de ce TP nous avons réussi à réaliser certaines fonctionnalités comme le fais de se connecter avec un id (l'adresse mail) mais aussi le fais de se déconnecter à partir d'un bouton introduit dans le nav barre. De plus si l'on n'a pas de compte on peut directement en créer un pour se connecter.
-Ensuite nous avons ajouté les fonctionnalités principales d'un blog, comme le fait de poster des blogs en les créant mais aussi les supprimer, on peut aussi voir les postes des autres personnes, la liste de nos postes et aussi nos commentaires.
+
+Ensuite nous avons ajouté les fonctionnalités principales d'un blog, comme le fait de poster des blogs en les créant mais aussi les supprimer, on peut aussi voir les postes des autres personnes, la liste de nos postes et aussi écrire des commentaires sur les postes. En outre les commentaires créés peuvent être supprimés un à un ou bien tous si l'on supprime directement le poste ou sont les commentaires.
+
+Enfin nous avons ajouté la fonctionnalité d'amener l'utilisateur directement sur la page login s'il n'est pas connecté et qu'il clique sur un des liens de la barre de navigation, de plus après qu'il se soit connecté ce dernier sera automatiquement emmené sur la page du lieu qu'il avait cliqué.
 Bien tout cela n'aurait pas pu être possible si nous n'avions pas réussi à lier les fichiers pythons, htmls et db.
+
+tout supprimer commentaire et juste le commentaire
 
 ## <a>Ce dont nous avons pas réussi</a>
 
@@ -32,14 +37,7 @@ Pour conclure, ce TP nous a permis d'appronfondir nos connaissances sur flask et
 Pour lancer le site web il faut d'abord installer des prérequis, qui sont les suivants :
 
 source venv/bin/ activate (optionnel)
-pip install flask
-pip install python-dotenv
-pip install bootstrap-flask
-pip install flask- sqlalchemy
-pip install flask-wtf
-pip install flask-login
-
-(vous pouvez directement aller dans le terminal et taper la commande suivante : pip install -r requirements.txt)
+pip install -r requirements.txt
 
 Enfin après avoir installé ces prérequis, il faut maintenant lancer la commande suivante : flask run
 Puis aller sur le lien donné dans le terminal
